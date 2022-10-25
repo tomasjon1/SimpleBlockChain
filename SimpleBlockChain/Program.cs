@@ -19,10 +19,14 @@ namespace SimpleBlockChain
             Console.WriteLine(user.Name);
 
             // test usersPool
-            UsersPool users = new UsersPool();
-            users.generateUsers();
-            users.printAllUsers();
+            //UsersPool users = new UsersPool();
+            //users.generateUsers();
+            //users.printAllUsers();
 
+            // test transactionsPool
+            TransactionsPool transactions = new TransactionsPool();
+            transactions.generateTransactions();
+            transactions.printAllTransactions();
         }
     }
 }

@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\TransactionsPool.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UsersPool.cs" />
     <Compile Include="Program.cs" />

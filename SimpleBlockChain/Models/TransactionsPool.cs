@@ -19,9 +19,44 @@ namespace SimpleBlockChain.Models
         {
             get { return transactions; }
         }
-        public void AddUser(Transaction transaction)
+        public void AddTransaction(Transaction transaction)
         {
             transactions.Add(transaction);
+        }
+
+        public void printAllTransactions()
+        {
+            foreach (var transaction in transactions)
+                Console.WriteLine($"{transaction.TransactionID} {transaction.Sender} {transaction.Receiver} {transaction.Amount}");
+        }
+
+        public void generateTransactions()
+        {
+            Random rnd = new Random();
+
+            for (int i = 0; i < 10; i++)
+                transactions.Add(
+                    new Transaction(
+                        generateString(rnd.Next(2, 10)),                            // HASHING
+                        generateString(rnd.Next(10, 20)),                            
+                        generateString(rnd.Next(10, 20)),                            
+                        Math.Round(rnd.NextDouble() * (1000000 - 100) + 100, 2))
+                    );
+        }
+
+        public string generateString(int size)
+        {
+            Random random = new Random(Guid.NewGuid().GetHashCode());
+            StringBuilder builder = new StringBuilder();
+
+            char ch;
+            for (int i = 0; i < size; i++)
+            {
+                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
+                builder.Append(ch);
+            }
+
+            return builder.ToString();
         }
     }    
 }
