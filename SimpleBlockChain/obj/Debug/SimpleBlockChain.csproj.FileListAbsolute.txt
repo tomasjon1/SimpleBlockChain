@@ -1,0 +1,8 @@
+C:\Users\Tomas Jonauskas\Desktop\VU dokai\2.2\Blockchain\SimpleBlockChain\SimpleBlockChain\SimpleBlockChain\bin\Debug\SimpleBlockChain.exe.config
+C:\Users\Tomas Jonauskas\Desktop\VU dokai\2.2\Blockchain\SimpleBlockChain\SimpleBlockChain\SimpleBlockChain\bin\Debug\SimpleBlockChain.exe
+C:\Users\Tomas Jonauskas\Desktop\VU dokai\2.2\Blockchain\SimpleBlockChain\SimpleBlockChain\SimpleBlockChain\bin\Debug\SimpleBlockChain.pdb
+C:\Users\Tomas Jonauskas\Desktop\VU dokai\2.2\Blockchain\SimpleBlockChain\SimpleBlockChain\SimpleBlockChain\obj\Debug\SimpleBlockChain.csproj.AssemblyReference.cache
+C:\Users\Tomas Jonauskas\Desktop\VU dokai\2.2\Blockchain\SimpleBlockChain\SimpleBlockChain\SimpleBlockChain\obj\Debug\SimpleBlockChain.csproj.SuggestedBindingRedirects.cache
+C:\Users\Tomas Jonauskas\Desktop\VU dokai\2.2\Blockchain\SimpleBlockChain\SimpleBlockChain\SimpleBlockChain\obj\Debug\SimpleBlockChain.csproj.CoreCompileInputs.cache
+C:\Users\Tomas Jonauskas\Desktop\VU dokai\2.2\Blockchain\SimpleBlockChain\SimpleBlockChain\SimpleBlockChain\obj\Debug\SimpleBlockChain.exe
+C:\Users\Tomas Jonauskas\Desktop\VU dokai\2.2\Blockchain\SimpleBlockChain\SimpleBlockChain\SimpleBlockChain\obj\Debug\SimpleBlockChain.pdb
