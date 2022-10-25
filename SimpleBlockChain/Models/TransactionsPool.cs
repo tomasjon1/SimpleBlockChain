@@ -19,6 +19,7 @@ namespace SimpleBlockChain.Models
         {
             get { return transactions; }
         }
+
         public void AddTransaction(Transaction transaction)
         {
             transactions.Add(transaction);

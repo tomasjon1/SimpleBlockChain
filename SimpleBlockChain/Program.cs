@@ -24,9 +24,13 @@ namespace SimpleBlockChain
             //users.printAllUsers();
 
             // test transactionsPool
-            TransactionsPool transactions = new TransactionsPool();
-            transactions.generateTransactions();
-            transactions.printAllTransactions();
+            //TransactionsPool transactions = new TransactionsPool();
+            //transactions.generateTransactions();
+            //transactions.printAllTransactions();
+
+            // test application
+            Application app = new Application();
+            app.run();
         }
     }
 }
