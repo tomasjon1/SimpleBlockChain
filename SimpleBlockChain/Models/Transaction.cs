@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleBlockChain.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,11 +15,13 @@ namespace SimpleBlockChain.Models
         private string receiver { get; set; }
         private double amount { get; set; }
 
+        private readonly HashService hashService = new HashService();
+
         public Transaction() { }
 
-        public Transaction(string transactionID, string sender, string receiver, double amount)
+        public Transaction(string sender, string receiver, double amount)
         {
-            TransactionID = transactionID; // HASH of other fields
+            TransactionID = hashService.ComputeSha256Hash(sender + receiver + amount.ToString());
             Sender = sender;
             Receiver = receiver;
             Amount = amount;

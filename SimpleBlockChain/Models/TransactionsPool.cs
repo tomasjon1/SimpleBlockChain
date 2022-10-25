@@ -33,16 +33,15 @@ namespace SimpleBlockChain.Models
                 Console.WriteLine($"{transaction.TransactionID} {transaction.Sender} {transaction.Receiver} {transaction.Amount}");
         }
 
-        public void generateTransactions(UsersPool users)
+        public void generateTransactions(UsersPool usersPool)
         {
             Random rnd = new Random();
 
             for (int i = 0; i < 10; i++)
                 transactions.Add(
                     new Transaction(
-                        utilytiService.generateString(rnd.Next(2, 10)),                            // HASHING
-                        users.Users[rnd.Next(10)].PublicKey,
-                        users.Users[rnd.Next(10)].PublicKey,                            
+                        usersPool.Users[rnd.Next(10)].PublicKey,
+                        usersPool.Users[rnd.Next(10)].PublicKey,                            
                         Math.Round(rnd.NextDouble() * (1000000 - 100) + 100, 2))
                     );
         }

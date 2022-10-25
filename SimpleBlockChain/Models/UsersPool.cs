@@ -12,6 +12,7 @@ namespace SimpleBlockChain.Models
     {
         private List<User> users { get; set; }
         private readonly UtilytiService utilytiService = new UtilytiService();
+        private readonly HashService hashService = new HashService();
 
 
         public UsersPool() 
@@ -43,7 +44,7 @@ namespace SimpleBlockChain.Models
             for (int i = 0; i < 10; i++)
                 users.Add(new User(
                     utilytiService.generateString(rnd.Next(2,10)),
-                    utilytiService.generateString(rnd.Next(10, 20)),                            // HASHING
+                    hashService.ComputeSha256Hash(utilytiService.generateString(rnd.Next(10, 20))),                            // HASHING
                     Math.Round(rnd.NextDouble() * (1000000 - 100) + 100, 2)));
         }
     }
