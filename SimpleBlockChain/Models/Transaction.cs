@@ -19,7 +19,7 @@ namespace SimpleBlockChain.Models
         public Transaction(string transactionID, string sender, string receiver, double amount)
         {
             TransactionID = transactionID; // HASH of other fields
-            Sender = transactionID;
+            Sender = sender;
             Receiver = receiver;
             Amount = amount;
         }

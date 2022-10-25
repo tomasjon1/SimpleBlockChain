@@ -8,23 +8,23 @@ namespace SimpleBlockChain.Models
 {
     class Application
     {
-        public UsersPool usersPool { get; set; }
-        public TransactionsPool transactionsPool { get; set; }
+        public UsersPool users { get; set; }
+        public TransactionsPool transactions { get; set; }
 
         public Application()
         {
-            usersPool = new UsersPool();
-            transactionsPool = new TransactionsPool();
+            users = new UsersPool();
+            transactions = new TransactionsPool();
         }
 
         public void run ()
         {
-            UsersPool users = new UsersPool();
             users.generateUsers();
             users.printAllUsers();
 
-            TransactionsPool transactions = new TransactionsPool();
-            transactions.generateTransactions();
+            Console.WriteLine();
+
+            transactions.generateTransactions(users);
             transactions.printAllTransactions();
         }
     }

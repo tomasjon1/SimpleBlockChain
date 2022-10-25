@@ -31,7 +31,7 @@ namespace SimpleBlockChain.Models
                 Console.WriteLine($"{transaction.TransactionID} {transaction.Sender} {transaction.Receiver} {transaction.Amount}");
         }
 
-        public void generateTransactions()
+        public void generateTransactions(UsersPool users)
         {
             Random rnd = new Random();
 
@@ -39,8 +39,8 @@ namespace SimpleBlockChain.Models
                 transactions.Add(
                     new Transaction(
                         generateString(rnd.Next(2, 10)),                            // HASHING
-                        generateString(rnd.Next(10, 20)),                            
-                        generateString(rnd.Next(10, 20)),                            
+                        users.Users[rnd.Next(10)].PublicKey,
+                        users.Users[rnd.Next(10)].PublicKey,                            
                         Math.Round(rnd.NextDouble() * (1000000 - 100) + 100, 2))
                     );
         }
