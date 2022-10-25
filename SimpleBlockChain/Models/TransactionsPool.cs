@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleBlockChain.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace SimpleBlockChain.Models
     class TransactionsPool
     {
         private List<Transaction> transactions;
+        private readonly UtilytiService utilytiService = new UtilytiService();
 
         public TransactionsPool()
         {
@@ -38,26 +40,11 @@ namespace SimpleBlockChain.Models
             for (int i = 0; i < 10; i++)
                 transactions.Add(
                     new Transaction(
-                        generateString(rnd.Next(2, 10)),                            // HASHING
+                        utilytiService.generateString(rnd.Next(2, 10)),                            // HASHING
                         users.Users[rnd.Next(10)].PublicKey,
                         users.Users[rnd.Next(10)].PublicKey,                            
                         Math.Round(rnd.NextDouble() * (1000000 - 100) + 100, 2))
                     );
-        }
-
-        public string generateString(int size)
-        {
-            Random random = new Random(Guid.NewGuid().GetHashCode());
-            StringBuilder builder = new StringBuilder();
-
-            char ch;
-            for (int i = 0; i < size; i++)
-            {
-                ch = Convert.ToChar(Convert.ToInt32(Math.Floor(26 * random.NextDouble() + 65)));
-                builder.Append(ch);
-            }
-
-            return builder.ToString();
         }
     }    
 }
