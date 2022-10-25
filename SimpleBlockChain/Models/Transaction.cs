@@ -9,7 +9,7 @@ namespace SimpleBlockChain.Models
 {
     class Transaction
     {
-        private string transactionID { get; set }
+        private string transactionID { get; set; }
         private string sender { get; set; }
         private string receiver { get; set; }
         private double amount { get; set; }
@@ -45,6 +45,5 @@ namespace SimpleBlockChain.Models
             get { return amount; }
             set { amount = value; }
         }
-
     }
 }
