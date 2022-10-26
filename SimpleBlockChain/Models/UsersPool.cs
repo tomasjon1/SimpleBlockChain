@@ -14,7 +14,6 @@ namespace SimpleBlockChain.Models
         private readonly UtilytiService utilytiService = new UtilytiService();
         private readonly HashService hashService = new HashService();
 
-
         public UsersPool() 
         {
             users = new List<User>();

@@ -10,6 +10,7 @@ namespace SimpleBlockChain.Models
     {
         public UsersPool usersPool { get; set; }
         public TransactionsPool transactionsPool { get; set; }
+        public List<Block> minedBlocks { get; set; }
 
         public Application()
         {
@@ -17,7 +18,7 @@ namespace SimpleBlockChain.Models
             transactionsPool = new TransactionsPool();
         }
 
-        public void run ()
+        public void run()
         {
             usersPool.generateUsers();
             usersPool.printAllUsers();
@@ -26,6 +27,18 @@ namespace SimpleBlockChain.Models
 
             transactionsPool.generateTransactions(usersPool);
             transactionsPool.printAllTransactions();
+
+            Console.WriteLine();
+
+
+            while (transactionsPool.Transactions.Count > 0)
+            {
+                string previousHash = "";
+                if (minedBlocks.Count == 0) previousHash = new string('0', 64);
+                else                        previousHash = minedBlocks[minedBlocks.Count - 1].Hash;
+
+                Block candidate = new Block(previousHash, DateTime.Now, "1", 1, transactionsPool.Transactions.GetRange(0, 100));
+            }
         }
     }
 }

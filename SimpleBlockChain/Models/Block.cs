@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleBlockChain.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,19 +20,20 @@ namespace SimpleBlockChain.Models
         public bool Transacted { get; set; } = false;
         public List<Transaction> Transactions { get; set; }
 
+        private readonly HashService hashService = new HashService();
+
         public Block() { }
-        public Block(string hash, string previousHash, DateTime timeStamp, string version, string merkleHash, int nonce, int difficulty, bool mined, bool transacted, List<Transaction> transactions)
+        public Block(string previousHash, DateTime timeStamp, string version, int difficulty, List<Transaction> transactions)
         {
-            Hash = hash;                    
             PreviousHash = previousHash;
             TimeStamp = timeStamp;
             Version = version;
-            MerkleHash = merkleHash;
-            Nonce = nonce;
             Difficulty = difficulty;
-            Mined = mined;
-            Transacted = transacted;
+
+            //MerkleHash = merkleHash;      
             Transactions = transactions;
-        } // Sis gal ir nereikalingas  ARBA ne visi fieldai reikalingi
+
+            Hash = hashService.ComputeSha256Hash((PreviousHash + TimeStamp + MerkleHash) + Nonce);                    
+        }
     }
 }
