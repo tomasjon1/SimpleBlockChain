@@ -9,9 +9,9 @@ namespace SimpleBlockChain.Models
 {
     class User
     {
-        private string name { get; set; }
-        private string publicKey { get; set; }
-        private double balance { get; set; }
+        public string Name { get; set; }
+        public string PublicKey { get; set; }
+        public double Balance { get; set; }
 
         public User() { }
 
@@ -20,22 +20,6 @@ namespace SimpleBlockChain.Models
             Name = name;
             PublicKey = publicKey;
             Balance = balance;
-        }
-
-        public string Name   
-        {
-            get { return name; }   
-            set { name = value; }  
-        } 
-        public string PublicKey
-        {
-            get { return publicKey; }   
-            set { publicKey = value; }  
-        } 
-        public double Balance
-        {
-            get { return balance; }   
-            set { balance = value; }  
         }
     }
 }
