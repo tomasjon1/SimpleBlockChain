@@ -10,7 +10,6 @@ namespace SimpleBlockChain.Models
     class TransactionsPool
     {
         private List<Transaction> transactions;
-        private readonly UtilytiService utilytiService = new UtilytiService();
 
         public TransactionsPool()
         {

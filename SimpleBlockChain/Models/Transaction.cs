@@ -27,7 +27,6 @@ namespace SimpleBlockChain.Models
             Amount = amount;
         }
 
-
         public string TransactionID
         {
             get { return transactionID; }

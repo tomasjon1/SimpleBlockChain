@@ -44,7 +44,7 @@ namespace SimpleBlockChain.Models
             for (int i = 0; i < 10; i++)
                 users.Add(new User(
                     utilytiService.generateString(rnd.Next(2,10)),
-                    hashService.ComputeSha256Hash(utilytiService.generateString(rnd.Next(10, 20))),                            // HASHING
+                    hashService.ComputeSha256Hash(utilytiService.generateString(rnd.Next(10, 20))),  
                     Math.Round(rnd.NextDouble() * (1000000 - 100) + 100, 2)));
         }
     }
