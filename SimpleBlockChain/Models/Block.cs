@@ -35,5 +35,17 @@ namespace SimpleBlockChain.Models
 
             Hash = hashService.ComputeSha256Hash((PreviousHash + TimeStamp + MerkleHash) + Nonce);                    
         }
+
+        public string createMerkleHash()
+        {
+            StringBuilder sum = new StringBuilder();
+
+            foreach (var transaction in Transactions)
+                sum.Append(transaction.TransactionID);
+
+            return hashService.ComputeSha256Hash(sum.ToString());
+        }
+
+
     }
 }
