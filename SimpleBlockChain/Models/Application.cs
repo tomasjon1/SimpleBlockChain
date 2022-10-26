@@ -30,6 +30,7 @@ namespace SimpleBlockChain.Models
 
             Console.WriteLine();
 
+            minedBlocks = new List<Block>();
 
             while (transactionsPool.Transactions.Count > 0)
             {
