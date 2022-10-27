@@ -36,7 +36,7 @@ namespace SimpleBlockChain.Models
         {
             Random rnd = new Random();
 
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1000; i++)
                 transactions.Add(
                     new Transaction(
                         usersPool.Users[rnd.Next(10)].PublicKey,

@@ -40,7 +40,7 @@ namespace SimpleBlockChain.Models
         {
             Random rnd = new Random();
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 100; i++)
                 users.Add(new User(
                     utilytiService.generateString(rnd.Next(2,10)),
                     hashService.ComputeSha256Hash(utilytiService.generateString(rnd.Next(10, 20))),  
