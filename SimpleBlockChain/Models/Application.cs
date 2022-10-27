@@ -39,6 +39,7 @@ namespace SimpleBlockChain.Models
                 else                        previousHash = minedBlocks[minedBlocks.Count - 1].Hash;
 
                 Block candidate = new Block(previousHash, DateTime.Now, "1", 1, transactionsPool.Transactions.GetRange(0, 100));
+                //canditate.mine();
             }
         }
     }

@@ -30,10 +30,10 @@ namespace SimpleBlockChain.Models
             Version = version;
             Difficulty = difficulty;
 
-            //MerkleHash = merkleHash;      
             Transactions = transactions;
 
-            Hash = hashService.ComputeSha256Hash((PreviousHash + TimeStamp + MerkleHash) + Nonce);                    
+            MerkleHash = createMerkleHash();
+            Hash = hashService.ComputeSha256Hash((PreviousHash + TimeStamp + MerkleHash) + Nonce);
         }
 
         public string createMerkleHash()
@@ -43,9 +43,29 @@ namespace SimpleBlockChain.Models
             foreach (var transaction in Transactions)
                 sum.Append(transaction.TransactionID);
 
+            Console.WriteLine(hashService.ComputeSha256Hash(sum.ToString()));
             return hashService.ComputeSha256Hash(sum.ToString());
         }
 
+        public void mine()
+        {
+            int nonce = 0;
+            string guessHash = hashService.ComputeSha256Hash(hashService.ComputeSha256Hash(PreviousHash + TimeStamp + MerkleHash) + nonce);
 
+            StringBuilder rebuiltHash = new StringBuilder(Hash);
+            for (int x = 0; x < Difficulty; x++) rebuiltHash[x] = '0';
+            string rebuildedHash = rebuiltHash.ToString();
+
+            if (guessHash.CompareTo(rebuildedHash) > 0)
+            {
+                nonce++;
+                guessHash = hashService.ComputeSha256Hash(hashService.ComputeSha256Hash(PreviousHash + TimeStamp + MerkleHash) + nonce);
+            }
+            else
+            {
+                Mined = true;
+                Nonce = nonce;
+            }
+        }
     }
 }
