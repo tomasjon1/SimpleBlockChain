@@ -40,24 +40,33 @@ namespace SimpleBlockChain.Models
             while (transactionsPool.Transactions.Count > 0)
             {
                 Console.WriteLine(transactionsPool.Transactions.Count);
-                string previousHash = "";
-                if (minedBlocks.Count == 0) previousHash = new string('0', 64);
-                else                        previousHash = minedBlocks[minedBlocks.Count - 1].Hash;
 
-                Block candidate = new Block(previousHash, DateTime.Now, "1", 1, transactionsPool.Transactions.GetRange(0, 100));
+                List<Block> candidates = new List<Block>();
+
+                for (int i = 0; i < 5; i++)
+                {
+                    string previousHash = "";
+                    if (minedBlocks.Count == 0) previousHash = new string('0', 64);
+                    else previousHash = minedBlocks[minedBlocks.Count - 1].Hash;
+
+                    candidates.Add(new Block(previousHash, DateTime.Now, "1", 1, transactionsPool.Transactions.GetRange(0, 100)));
+                }
+
                 Console.WriteLine("Block mining started!");
 
-                candidate.mine();
+                Block minedBlock = new Block();
+
+              
 
                 int transactionCount = 1;
 
-                if (candidate.Mined)
+                if (minedBlock.Mined)
                 {
                     Console.WriteLine("Block mined!");
                     List<string> transactions = new List<string>();
                     List<string> failedTransactions = new List<string>();
 
-                    foreach (Transaction t in candidate.Transactions)
+                    foreach (Transaction t in minedBlock.Transactions)
                     {
                         int sender = usersPool.Users.FindIndex(x => x.PublicKey == t.Sender);
                         int receiver = usersPool.Users.FindIndex(x => x.PublicKey == t.Receiver);
@@ -76,10 +85,10 @@ namespace SimpleBlockChain.Models
                         transactions.Add(t.TransactionID);
                     }
                     transactionsPool.Transactions.RemoveAll(x => transactions.Contains(x.TransactionID));
-                    candidate.Transactions.RemoveAll(x => failedTransactions.Contains(x.TransactionID));
+                    minedBlock.Transactions.RemoveAll(x => failedTransactions.Contains(x.TransactionID));
                 }
                 transactionCount--;
-                minedBlocks.Add(candidate);
+                minedBlocks.Add(minedBlock);
             }
         }
     }
