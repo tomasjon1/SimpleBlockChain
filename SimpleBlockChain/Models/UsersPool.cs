@@ -1,6 +1,7 @@
 ﻿using SimpleBlockChain.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
@@ -34,6 +35,8 @@ namespace SimpleBlockChain.Models
         {
             foreach (var user in users)
                 Console.WriteLine($"{user.Name} {user.PublicKey} {user.Balance}" );
+               
+
         }
 
         public void generateUsers()
@@ -41,10 +44,15 @@ namespace SimpleBlockChain.Models
             Random rnd = new Random();
 
             for (int i = 0; i < 100; i++)
+            {
                 users.Add(new User(
-                    utilytiService.generateString(rnd.Next(2,10)),
-                    hashService.ComputeSha256Hash(utilytiService.generateString(rnd.Next(10, 20))),  
+                    utilytiService.generateString(rnd.Next(2, 10)),
+                    hashService.ComputeSha256Hash(utilytiService.generateString(rnd.Next(10, 20))),
                     Math.Round(rnd.NextDouble() * (1000000 - 100) + 100, 2)));
+                File.AppendAllText(AppContext.BaseDirectory + @"Results\Users.txt", $"{users[i].Name}\n{users[i].PublicKey}\n{users[i].Balance}\n\n");
+
+            }
+
         }
     }
 }

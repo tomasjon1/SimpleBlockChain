@@ -25,15 +25,26 @@ namespace SimpleBlockChain.Models
         public void run()
         {
 
-            usersPool.generateUsers();
-            usersPool.printAllUsers();
+            if (!Directory.Exists(AppContext.BaseDirectory + @"Results\"))
+            {
+                Directory.CreateDirectory(AppContext.BaseDirectory + @"Results\");
+            }
+            if (File.Exists(AppContext.BaseDirectory + @"Results\Transactions.txt"))
+            {
+                File.Delete(AppContext.BaseDirectory + @"Results\Transactions.txt");
+            }
+            if (File.Exists(AppContext.BaseDirectory + @"Results\Blocks.txt"))
+            {
+                File.Delete(AppContext.BaseDirectory + @"Results\Blocks.txt");
+            }
+            if (File.Exists(AppContext.BaseDirectory + @"Results\Users.txt"))
+            {
+                File.Delete(AppContext.BaseDirectory + @"Results\Users.txt");
+            }
 
-            Console.WriteLine();
+            usersPool.generateUsers();
 
             transactionsPool.generateTransactions(usersPool);
-            transactionsPool.printAllTransactions();
-
-            Console.WriteLine();
 
             minedBlocks = new List<Block>();
 
@@ -49,14 +60,26 @@ namespace SimpleBlockChain.Models
                     if (minedBlocks.Count == 0) previousHash = new string('0', 64);
                     else previousHash = minedBlocks[minedBlocks.Count - 1].Hash;
 
-                    candidates.Add(new Block(previousHash, DateTime.Now, "1", 1, transactionsPool.Transactions.GetRange(0, 100)));
+                    candidates.Add(new Block(previousHash, DateTime.Now, "1", 4, transactionsPool.Transactions.GetRange(0, 100)));
                 }
 
                 Console.WriteLine("Block mining started!");
 
                 Block minedBlock = new Block();
 
-              
+                Parallel.ForEach(candidates, (block, state) =>
+                {
+                    block.mine();
+
+                    foreach (Block c in candidates)
+                        if(c.Mined)
+                        {
+                            minedBlock = c;
+                            state.Break();
+                            break;
+                        }    
+
+                });
 
                 int transactionCount = 1;
 
@@ -76,6 +99,8 @@ namespace SimpleBlockChain.Models
                             usersPool.Users[receiver].Balance += t.Amount;
                             usersPool.Users[sender].Balance -= t.Amount;
 
+                            File.AppendAllText(AppContext.BaseDirectory + @"Results\Transactions.txt", $"#{transactionCount} Sender: {usersPool.Users[sender].PublicKey} Receiver: {usersPool.Users[receiver].PublicKey} Amount: {t.Amount} \n");
+
                             transactionCount++;
                         }
                         else
@@ -89,6 +114,9 @@ namespace SimpleBlockChain.Models
                 }
                 transactionCount--;
                 minedBlocks.Add(minedBlock);
+                File.AppendAllText(AppContext.BaseDirectory + @"Results\Transactions.txt", $"\n");
+
+                File.AppendAllText(AppContext.BaseDirectory + @"Results\Blocks.txt", $"Hash: {minedBlock.Hash} \nPrevious hash: {minedBlock.PreviousHash} \nTimestamp: {minedBlock.TimeStamp} \nHeight: {minedBlocks.Count} \nNumber of transactions: {minedBlock.Transactions.Count} \nDifficulty: {minedBlock.Difficulty}: \nMerkle root: {minedBlock.MerkleHash} \nVersion: {minedBlock.Version} \nNonce: {minedBlock.Nonce} \n\n");
             }
         }
     }
